@@ -1,0 +1,32 @@
+stateDiagram-v2
+  accTitle: Case status lifecycle
+  accDescr: A case is active with one of four status reasons, then is either resolved or cancelled; resolved cases can be reactivated.
+  [*] --> Active
+  state "Active (statecode 0)" as Active {
+    [*] --> InProgress
+    state "In Progress (1)" as InProgress
+    state "On Hold (2)" as OnHold
+    state "Waiting for Details (3)" as Waiting
+    state "Researching (4)" as Researching
+    InProgress --> OnHold
+    OnHold --> InProgress
+    InProgress --> Waiting
+    Waiting --> InProgress
+    InProgress --> Researching
+    Researching --> InProgress
+  }
+  state "Resolved (statecode 1)" as Resolved {
+    state "Problem Solved (5)" as Solved
+    state "Information Provided (1000)" as InfoProvided
+  }
+  state "Cancelled (statecode 2)" as Cancelled {
+    state "Cancelled (6)" as CancelledReason
+    state "Merged (2000)" as Merged
+  }
+  Active --> Solved : Resolve case
+  Active --> InfoProvided : Resolve case
+  Active --> CancelledReason : Cancel case
+  Active --> Merged : Merge cases
+  Resolved --> Active : Reactivate
+  Resolved --> [*]
+  Cancelled --> [*]

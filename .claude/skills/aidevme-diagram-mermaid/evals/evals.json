@@ -1,0 +1,83 @@
+{
+  "skill_name": "aidevme-diagram-mermaid",
+  "evals": [
+    {
+      "id": 1,
+      "should_trigger": true,
+      "prompt": "Draw an ER diagram of Account, Contact and Opportunity in Dataverse.",
+      "expected_output": "An erDiagram using Dataverse logical names, validated through the detected backend, delivered as a mermaid block with a one-sentence caption.",
+      "files": [],
+      "expectations": [
+        "Probes for validate_and_render_mermaid_diagram (or a fallback backend) before delivering",
+        "Uses erDiagram with account, contact and opportunity entities and cardinality notation (for example ||--o{)",
+        "Includes accTitle and accDescr lines",
+        "Reports which backend validated the diagram, or marks it not validated"
+      ]
+    },
+    {
+      "id": 2,
+      "should_trigger": true,
+      "prompt": "Show how a sync PreOperation plugin and an async PostOperation plugin run when an Opportunity is won.",
+      "expected_output": "A validated sequenceDiagram showing the transaction, the sync PreOperation plugin with a failure/rollback branch, and the async PostOperation plugin after commit.",
+      "files": [],
+      "expectations": [
+        "Uses sequenceDiagram with autonumber",
+        "Contains an alt block for the sync failure or rollback path",
+        "Contains a par block (or a clearly separate async lane) for the PostOperation plugin",
+        "activate/deactivate (or +/-) are balanced and the diagram validates",
+        "Includes accTitle and accDescr"
+      ]
+    },
+    {
+      "id": 3,
+      "should_trigger": true,
+      "prompt": "This Mermaid doesn't render, fix it:\n\nflowchart TD\n  start --> end\n  end --> B(Call API (POST))\n  B --> C{Valid?}",
+      "expected_output": "The reserved word end is renamed or quoted, the label with parentheses is quoted, and the fixed diagram is validated before delivery.",
+      "files": [],
+      "expectations": [
+        "Identifies lowercase end as a reserved word and renames it (for example done or End) or quotes it",
+        "Quotes the label containing parentheses, for example B[\"Call API (POST)\"]",
+        "Re-validates the fixed code (max 3 attempts) and states the result",
+        "Edits the given code rather than generating an unrelated diagram"
+      ]
+    },
+    {
+      "id": 4,
+      "should_trigger": true,
+      "prompt": "Architecture diagram for a Copilot Studio agent calling an Azure Function MCP server that reads Dataverse.",
+      "expected_output": "A C4Container (or architecture-beta / flowchart) view with the agent, the Azure Function MCP server and Dataverse, at most 25 nodes, validated and visually self-checked.",
+      "files": [],
+      "expectations": [
+        "Chooses C4Container, C4Context or architecture-beta (or a flowchart fallback if a beta type is rejected)",
+        "Shows Copilot Studio agent, Azure Function MCP server and Dataverse with labelled relationships",
+        "Has no more than 25 nodes",
+        "Includes accTitle and accDescr (or a caption when the type does not support them)"
+      ]
+    },
+    {
+      "id": 5,
+      "should_trigger": true,
+      "prompt": "Save this diagram to my Mermaid Chart project.",
+      "expected_output": "Projects are listed with list_mermaid_chart_projects, the user is asked which project and whether to create or update, and nothing is written before explicit confirmation.",
+      "files": [],
+      "expectations": [
+        "Calls list_mermaid_chart_projects before any write",
+        "Asks the user to choose the project and confirm the action",
+        "Does not call create_mermaid_chart_diagram or update_mermaid_chart_diagram before confirmation",
+        "Offers to anonymise customer or person names before saving to the cloud",
+        "Never asks for or echoes an auth token"
+      ]
+    },
+    {
+      "id": 6,
+      "should_trigger": false,
+      "prompt": "Explain what a Dataverse table is.",
+      "expected_output": "The skill does not trigger; a plain explanation is enough.",
+      "files": [],
+      "expectations": [
+        "The aidevme-diagram-mermaid skill is not invoked",
+        "No Mermaid code is produced unless the user asks for a diagram"
+      ]
+    }
+  ]
+}

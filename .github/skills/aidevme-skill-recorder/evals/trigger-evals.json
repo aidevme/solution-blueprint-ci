@@ -1,0 +1,22 @@
+[
+  {
+    "query": "That deployment fix we just walked through — the pac auth, export, unpack and commit steps — can you turn what we just did into a skill so I don't have to remember it next sprint?",
+    "should_trigger": true
+  },
+  {
+    "query": "I exported this from Skill Recorder (intent.json + steps). It's me registering a new plugin step in the Plugin Registration Tool. Convert this Skill Recorder session into a Claude skill please.",
+    "should_trigger": true
+  },
+  {
+    "query": "Here are 9 screenshots of me creating a new security role and copying privileges from Salesperson in the maker portal. Make a skill from these screenshots, but use the Web API wherever possible.",
+    "should_trigger": true
+  },
+  {
+    "query": "Export the CoreCustomisations solution from dev and unpack it into src/ for me now.",
+    "should_trigger": false
+  },
+  {
+    "query": "Our aidevme-diagram-drawio skill's description isn't firing on 'draw an ERD' — can you tweak its frontmatter description?",
+    "should_trigger": false
+  }
+]

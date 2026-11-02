@@ -1,5 +1,7 @@
 # solution-blueprint-ci
 
+![An automated pipeline feeds a glowing engine that produces an entity relationship diagram, a document with a flowchart, and a report with charts.](assets/solution-blueprint-ci-preview.png)
+
 > Generate architecture documentation for Power Platform & Dataverse solutions in CI/CD.
 
 ![Status](https://img.shields.io/badge/status-early%20development-orange)
@@ -38,6 +40,7 @@ PPSB produces excellent blueprints, but it runs interactively inside PPTB Deskto
 **Analysis**
 
 - Entity relationship diagram (Mermaid)
+- Entity relationship diagram (Draw.io)
 - Execution pipeline per table (client → sync → async)
 - Cross-entity automation chains
 - External dependency detection with risk scoring
@@ -81,6 +84,8 @@ Local / any CI  ──► CLI ────────────────�
 
 ## Usage
 
+Every run needs at least one solution, identified by its **unique name**, not its display name. Use `--solutions` with the CLI and the `solutions` input with the GitHub Action and the Azure DevOps task. Separate several unique names with commas.
+
 ### CLI
 
 ```bash
@@ -105,7 +110,7 @@ Credentials are read from environment variables, never from arguments:
 | Option | Description | Default |
 |---|---|---|
 | `--env-url` | Dataverse environment URL | required |
-| `--solutions` | Comma-separated solution unique names | — |
+| `--solutions` | One solution unique name, or several separated by commas | required |
 | `--publishers` | Comma-separated publisher prefixes | — |
 | `--format` | `md`, `html`, `json`, `zip` (comma-separated) | `md` |
 | `--out` | Output directory | `./blueprint` |

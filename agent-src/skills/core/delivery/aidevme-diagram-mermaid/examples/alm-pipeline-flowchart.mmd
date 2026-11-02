@@ -1,0 +1,32 @@
+---
+config:
+  theme: base
+---
+flowchart LR
+  accTitle: Power Platform ALM pipeline
+  accDescr: Changes are exported from Dev as an unmanaged solution into source control, built into a managed solution, and deployed to Test and then Production after approval.
+  subgraph sgDev["Dev environment"]
+    dev["Unmanaged solution"]
+  end
+  subgraph sgRepo["Source control"]
+    export["Export and unpack"]
+    pr{"PR approved?"}
+  end
+  subgraph sgBuild["Build pipeline"]
+    pack["Pack managed solution"]
+    check["Solution checker"]
+  end
+  subgraph sgRelease["Release pipeline"]
+    test["Test (managed)"]
+    gate{"Release approval"}
+    prod["Production (managed)"]
+  end
+  dev --> export --> pr
+  pr -- Yes --> pack --> check --> test --> gate
+  pr -- No --> dev
+  gate -- Approved --> prod
+  gate -- "⚠ Rejected" --> dev
+  classDef dataverse fill:#DBEAFE,stroke:#1D4ED8,color:#1F2937
+  classDef warning fill:#FEF3C7,stroke:#B45309,color:#1F2937,stroke-width:2px
+  class dev,test,prod dataverse
+  class gate warning
