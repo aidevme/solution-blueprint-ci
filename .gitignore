@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+# The GitHub Action runs from its bundled dist/, so it stays committed
+!packages/gh-action/dist/
+/build/
+/packages/*/build/
+*.tsbuildinfo
+*.vsix
+*.tgz
+
+# Test output
+coverage/
+.vitest/
+
+# Logs and caches
+*.log
+.cache/
+.eslintcache
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+.npmrc
+
+# Generated blueprints can contain client metadata
+/blueprint/
+/blueprint.zip
+
+# Machine-specific assistant settings
+CLAUDE.local.md
+.github/copilot-instructions.local.md
+.claude/settings.local.json
+
+# Local working folders
+/.worktrees/
+/Worklog/
+/shared/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
