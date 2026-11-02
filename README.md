@@ -191,18 +191,6 @@ blueprint/
 └─ blueprint.json             Full dataset
 ```
 
-## Development
-
-```bash
-git clone https://github.com/aidevme/solution-blueprint-ci.git
-cd solution-blueprint-ci
-pnpm install
-pnpm build
-pnpm test
-```
-
-Requirements: Node.js 22.12+ and pnpm 11+. The published packages run on Node.js 20 or later.
-
 ## Roadmap
 
 - [ ] Headless core with Dataverse Web API client
@@ -219,7 +207,7 @@ This project builds on **[Power Platform Solution Blueprint (PPSB)](https://gith
 
 ## Contributing
 
-Issues and pull requests are welcome. Please open an issue first to discuss significant changes.
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started, and [DEVELOPER.md](DEVELOPER.md) to build and test locally.
 
 ## License
 
