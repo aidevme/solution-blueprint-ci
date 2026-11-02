@@ -1,0 +1,31 @@
+sequenceDiagram
+  accTitle: Plugin pipeline when an opportunity is won
+  accDescr: A synchronous PreOperation plugin runs inside the transaction and can roll back the win; after commit, an asynchronous PostOperation plugin runs through the async service.
+  autonumber
+  actor U as Sales user
+  participant D as Dataverse platform
+  participant Pre as PreOperation plugin (sync)
+  participant DB as Database transaction
+  participant Q as Async service
+  participant Post as PostOperation plugin (async)
+  U->>D: Close as Won (WinOpportunity)
+  D->>+DB: Begin transaction
+  D->>+Pre: Execute (stage 20)
+  alt validation fails
+    Pre-->>D: InvalidPluginExecutionException
+    D->>DB: Roll back
+    D-->>U: Error dialog
+  else validation passes
+    Pre-->>-D: Target updated
+    D->>DB: MainOperation (stage 30) writes opportunity
+    DB-->>-D: Commit
+    D-->>U: Opportunity won
+    D-)Q: Queue system job (stage 40)
+  end
+  par async work
+    Q->>+Post: Execute
+    Post->>D: Create follow-up project
+    Post-->>-Q: Completed
+  and user continues
+    U->>D: Open next record
+  end

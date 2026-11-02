@@ -1,0 +1,21 @@
+C4Container
+  accTitle: Copilot agent with MCP server over Dataverse
+  accDescr: A user talks to a Copilot Studio agent, which calls an MCP server hosted in an Azure Function; the function reads Dynamics 365 data and publishes events to Service Bus.
+  title Container view: Copilot Studio agent and MCP integration
+  Person(user, "Sales user", "Asks questions in Teams")
+  System_Boundary(pp, "Power Platform") {
+    Container(agent, "Copilot Studio agent", "Copilot Studio", "Answers questions, calls tools")
+    ContainerDb(dv, "Dynamics 365 CE", "Dataverse", "Accounts, opportunities, projects")
+  }
+  System_Boundary(az, "Azure") {
+    Container(mcp, "MCP server", "Azure Function, .NET", "Exposes Dataverse tools over MCP")
+    ContainerQueue(sb, "Service Bus", "Azure Service Bus", "Integration events")
+  }
+  System_Ext(entra, "Entra ID", "Issues tokens")
+  Rel(user, agent, "Chats with", "Teams")
+  Rel(agent, mcp, "Calls tools", "MCP over HTTPS")
+  Rel(mcp, dv, "Reads", "Dataverse Web API")
+  Rel(mcp, sb, "Publishes events", "AMQP")
+  Rel(mcp, entra, "Gets token", "OAuth 2.0")
+  UpdateRelStyle(user, agent, $offsetY="-40")
+  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="2")

@@ -1,0 +1,39 @@
+---
+config:
+  theme: base
+---
+erDiagram
+  accTitle: Dataverse sales data model
+  accDescr: Accounts have contacts and opportunities; a custom project table links to opportunities and to accounts many-to-many through an intersect table.
+  account ||--o{ contact : "parent customer"
+  contact |o--o| account : "primary contact"
+  account ||--o{ opportunity : "potential customer"
+  contact |o--o{ opportunity : "contact"
+  opportunity ||--o{ aidev_project : "delivered by"
+  account ||--o{ aidev_account_project : "N:N"
+  aidev_project ||--o{ aidev_account_project : "N:N"
+  account {
+    uniqueidentifier accountid PK
+    string name
+    uniqueidentifier primarycontactid FK
+  }
+  contact {
+    uniqueidentifier contactid PK
+    string fullname
+    uniqueidentifier parentcustomerid FK
+  }
+  opportunity {
+    uniqueidentifier opportunityid PK
+    string name
+    money estimatedvalue
+    uniqueidentifier customerid FK
+  }
+  aidev_project {
+    uniqueidentifier aidev_projectid PK
+    string aidev_name
+    uniqueidentifier aidev_opportunityid FK
+  }
+  aidev_account_project {
+    uniqueidentifier accountid FK
+    uniqueidentifier aidev_projectid FK
+  }
