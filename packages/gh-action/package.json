@@ -1,0 +1,12 @@
+{
+  "name": "@aidevme/blueprint-gh-action",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit -p tsconfig.json && esbuild src/index.ts --bundle --platform=node --target=node24 --format=esm --outfile=dist/index.js"
+  },
+  "dependencies": {
+    "@aidevme/blueprint-core": "workspace:*"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@aidevme/blueprint-cli",
+  "version": "0.1.0",
+  "description": "Generate architecture documentation for Power Platform and Dataverse solutions from the command line.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aidevme/solution-blueprint-ci.git",
+    "directory": "packages/cli"
+  },
+  "type": "module",
+  "bin": {
+    "blueprint": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@aidevme/blueprint-core": "workspace:*"
+  }
+}

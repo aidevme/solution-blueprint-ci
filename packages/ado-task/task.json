@@ -1,0 +1,57 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+  "id": "7f3c2a9e-4b1d-4e6a-9c85-2d1f60ab3e47",
+  "name": "SolutionBlueprint",
+  "friendlyName": "Solution Blueprint",
+  "description": "Generate architecture documentation for Power Platform and Dataverse solutions.",
+  "category": "Utility",
+  "author": "AIDevMe",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 0
+  },
+  "instanceNameFormat": "Generate solution blueprint",
+  "inputs": [
+    {
+      "name": "connection",
+      "type": "connectedService:powerplatform-spn",
+      "label": "Power Platform service connection",
+      "required": true
+    },
+    {
+      "name": "solutions",
+      "type": "string",
+      "label": "Solutions",
+      "required": true,
+      "helpMarkDown": "One solution unique name, or several separated by commas."
+    },
+    {
+      "name": "formats",
+      "type": "string",
+      "label": "Formats",
+      "defaultValue": "md",
+      "required": false,
+      "helpMarkDown": "md, html, json, zip, separated by commas."
+    },
+    {
+      "name": "outputDir",
+      "type": "string",
+      "label": "Output directory",
+      "defaultValue": "./blueprint",
+      "required": false
+    },
+    {
+      "name": "failOn",
+      "type": "string",
+      "label": "Fail on findings",
+      "required": false,
+      "helpMarkDown": "high-risk, external-sync, deprecated, separated by commas."
+    }
+  ],
+  "execution": {
+    "Node20_1": {
+      "target": "dist/index.cjs"
+    }
+  }
+}

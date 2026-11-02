@@ -1,0 +1,35 @@
+name: Solution Blueprint CI
+description: Generate architecture documentation for Power Platform and Dataverse solutions.
+branding:
+  icon: file-text
+  color: purple
+inputs:
+  environment-url:
+    description: Dataverse environment URL.
+    required: true
+  tenant-id:
+    description: Entra ID tenant ID.
+    required: true
+  client-id:
+    description: Application (client) ID of the service principal.
+    required: true
+  client-secret:
+    description: Client secret. Omit when using OIDC.
+    required: false
+  solutions:
+    description: One solution unique name, or several separated by commas.
+    required: true
+  formats:
+    description: Output formats, separated by commas (md, html, json, zip).
+    required: false
+    default: md
+  output-dir:
+    description: Output directory.
+    required: false
+    default: ./blueprint
+  fail-on:
+    description: Fail on these findings, separated by commas (high-risk, external-sync, deprecated).
+    required: false
+runs:
+  using: node24
+  main: packages/gh-action/dist/index.js
