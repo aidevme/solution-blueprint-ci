@@ -1,0 +1,68 @@
+name: "Repo tooling: new skill or agent"
+description: For maintainers. Propose a new aidevme skill or subagent.
+title: "[Skill]: "
+labels: ["skill", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        New skills are created with **aidevme-skill-creator** in `agent-src/skills/<scope>/`, registered in the
+        manifest and synced. A recorded workflow can be turned into a skill with **aidevme-skill-recorder**.
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name
+      description: kebab-case, prefixed `aidevme-` — e.g. aidevme-release-notes.
+      placeholder: aidevme-
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type
+      options:
+        - Skill
+        - Subagent
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem it solves
+      description: What job does it do, and why don't the existing skills cover it?
+    validations:
+      required: true
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Trigger phrases
+      description: What would you say to make it run? One per line.
+      placeholder: |
+        write the release notes
+        draft the notes for this version
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: Near-miss requests it should NOT handle, and which skill should.
+  - type: textarea
+    id: tools
+    attributes:
+      label: Tools, MCP servers and data
+      description: CLIs, APIs or MCP servers it needs; inputs and outputs (files, folders).
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - project (specific to this repository)
+        - core (reusable, no project identity)
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Reference material
+      description: Templates, examples or URLs to build from (check licenses before adapting).

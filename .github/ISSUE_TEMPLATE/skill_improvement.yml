@@ -1,0 +1,51 @@
+name: "Repo tooling: skill or agent improvement"
+description: For maintainers. Change or extend an existing skill or agent.
+title: "[Improve]: "
+labels: ["skill", "enhancement"]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Skill or agent
+      options:
+        - aidevme-diagram-mermaid
+        - aidevme-diagram-drawio
+        - aidevme-github
+        - aidevme-vitepress
+        - aidevme-docs-maintenance
+        - aidevme-skill-recorder
+        - aidevme-skill-creator
+        - aidevme-skills-sync
+        - aidevme-shared-scripts
+        - playwright-cli
+        - skill-creator
+        - change-reviewer (agent)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Requested change
+      description: What should the skill or agent do differently?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: The situation where the current behavior falls short (example prompt or result).
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Done when
+      description: How we'll know it works — e.g. an eval prompt and the expected behavior.
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Also affects
+      options:
+        - label: Other skills that hand off to or from this one
+        - label: The skill's evals
