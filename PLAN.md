@@ -21,7 +21,7 @@ Legend: ✅ done · 🔄 in progress · ⬜ not started
 
 | Area | What exists | Status |
 | --- | --- | --- |
-| Product | `packages/` doesn't exist yet; the design and roadmap are in `README.md` | ⬜ |
+| Product | pnpm workspace in `packages/` (`core`, `cli`, `gh-action`, `ado-task`) with input handling and tests; blueprint generation and authentication are stubs. Design and roadmap are in `README.md` | 🔄 |
 | Agent layer | `AGENTS.md` → `CLAUDE.md` / Copilot instructions; 11 skills and the `change-reviewer` agent synced to `.claude/` and `.github/`; `verify-parity.ps1`; not committed yet | 🔄 |
 | Changelogs | A `CHANGELOG.md` per skill (the only history); `check-changelogs.ps1` creates missing ones and gates changes; the style guide is missing | 🔄 |
 | Diagrams | `aidevme-diagram-mermaid`, `aidevme-diagram-drawio` | ✅ |
@@ -37,6 +37,10 @@ Legend: ✅ done · 🔄 in progress · ⬜ not started
 
 - ⬜ Record the first product decisions as ADRs: the Dataverse client, the use of PPSB and the package layout.
 - ⬜ Build the roadmap in `README.md`, starting with the headless core and its Dataverse Web API client.
+- ⬜ Before the first publish: claim the `@aidevme` npm scope, confirm the `aidevme` Visual Studio Marketplace
+  publisher, and verify the `powerplatform-spn` service connection type in `packages/ado-task/task.json`.
+- ⬜ Decide the role of `--publishers`, and whether the Azure Artifacts section stays in `README.md` now that npm is
+  the main route.
 
 ### Release and workflow
 

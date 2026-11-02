@@ -58,10 +58,11 @@ PPSB produces excellent blueprints, but it runs interactively inside PPTB Deskto
 
 ```
 solution-blueprint-ci/
+├─ action.yml                                GitHub Action entry point
 ├─ packages/
 │  ├─ core/        @aidevme/blueprint-core   Dataverse client, analysis engine, exporters
 │  ├─ cli/         @aidevme/blueprint-cli    `blueprint` command
-│  ├─ gh-action/                             action.yml + bundled dist/ (node24)
+│  ├─ gh-action/                             Action source + bundled dist/ (node24)
 │  └─ ado-task/                              task.json + vss-extension.json → .vsix
 └─ docs/
 ```
@@ -200,7 +201,7 @@ pnpm build
 pnpm test
 ```
 
-Requirements: Node.js 20+ and pnpm 9+.
+Requirements: Node.js 22.12+ and pnpm 11+. The published packages run on Node.js 20 or later.
 
 ## Roadmap
 

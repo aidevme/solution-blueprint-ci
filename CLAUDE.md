@@ -81,6 +81,8 @@ ADR-0008 (`docs/decisions/`, the sync mechanism) still applies.
 | `.content/wordpress-posts/<slug>/` | One folder per post: `index.md` (article with WordPress frontmatter), `images/`, `tables/`, `diagrams/`, `image-generation-prompts.md` and the social drafts |
 | `.content/templates/wordpress-post-template/` | The formats to copy for the files in a post folder |
 | `.research/` | Timestamped research runs (`<YYYY-MM-DD_HHmmss>_…`), one new file or folder per run, never overwritten |
+| `packages/` | pnpm workspace: `core` and `cli` publish to npm; `gh-action` and `ado-task` are private and bundle `core` |
+| `action.yml` | GitHub Action entry point; runs the committed bundle in `packages/gh-action/dist/` |
 | `agent-src/skills/core/<group>/<name>/` | Reusable skills (`delivery`, `foundation`, `meta`, `reference`) |
 | `agent-src/skills/project/<name>/` | Skills written for aidevme.com (no group folder) |
 | `agent-src/agents/` | `change-reviewer` |
