@@ -28,6 +28,7 @@ Legend: ✅ done · 🔄 in progress · ⬜ not started
 | Skills check | `skills-validation` agentic workflow: weekly `validate-skills.sh` run reporting a `[Skills check]` issue; not on `main` yet | 🔄 |
 | Pull request review | `pr-review` agentic workflow: non-blocking review with inline comments and a summary; not on `main` yet, first run still to confirm | 🔄 |
 | Repo hygiene | Issue forms for the product and repo tooling, `SECURITY.md`, `.gitignore` | ✅ |
+| Docs site | VitePress 2.0.0-alpha.18 site in `github-pages/`, built on pull requests and deployed to GitHub Pages by `docs.yml`; Pages not enabled and not deployed yet | 🔄 |
 
 ---
 
@@ -53,6 +54,8 @@ Legend: ✅ done · 🔄 in progress · ⬜ not started
 - ⬜ Merge `dev` into `main`. Scheduled workflows run from `main`, so workflow changes take effect only after the
   merge.
 - ⬜ Watch the first `pr-review` and `skills-validation` runs.
+- ⬜ Set the GitHub Pages source to GitHub Actions, run the first `docs.yml` deployment from `main`, and set the
+  repository's website field to the site URL.
 
 ### Agent layer
 
@@ -76,6 +79,7 @@ Newest first. Details in each skill's `CHANGELOG.md` and the commit.
 | Date | Decision |
 | --- | --- |
 | 2026-11-02 | The product copies PPSB's `src/core` and runs it on `TokenDataverseClient`; tokens come from Entra ID through `fetch`, not `@azure/identity`, to keep the bundles free of dependencies (ADR-0010) |
+| 2026-11-03 | The docs site is VitePress, pinned to 2.0.0-alpha.18, in `github-pages/` and deployed to GitHub Pages; ADRs stay in `docs/decisions/` and the site links to them |
 | 2026-11-03 | The packages need Node.js 22 or later; the Azure DevOps task declares the `Node24` runner, because Azure Pipelines has no Node.js 22 runner |
 | 2026-11-02 | Removed the inherited template docs (ADRs other than ADR-0008, `docs/onboarding/`, `docs/review-logs/`): they described a template this repo doesn't use and internal sources, in a public repo |
 | 2026-11-02 | This plan tracks solution-blueprint-ci; blog content and channel tasks are out of scope here |

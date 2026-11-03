@@ -16,6 +16,8 @@
 
 Each run connects to a Dataverse environment with a service principal, discovers the selected solutions, and exports a complete blueprint as **Markdown** (ready for Azure DevOps Wiki), **HTML** (for stakeholders) and **JSON** (for automation and baselines).
 
+**Documentation:** [aidevme.github.io/solution-blueprint-ci](https://aidevme.github.io/solution-blueprint-ci/)
+
 > [!NOTE]
 > This project is in early development. The commands, inputs and package names below describe the target design and may change before the first release.
 

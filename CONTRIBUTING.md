@@ -19,7 +19,8 @@ Follow [DEVELOPER.md](DEVELOPER.md) to clone, build and test the project.
 2. Keep the change focused. Mention unrelated problems separately instead of fixing them in the same pull request.
 3. Add or update tests for any behavior you change.
 4. Run `pnpm test`, which builds every package and runs the tests.
-5. Update `README.md` if users will notice the change.
+5. Update `README.md` and the docs site in `github-pages/` if users will notice the change. Preview the site with
+   `pnpm docs:dev`, and check it with `pnpm docs:build`, which fails on dead links.
 
 The shared logic belongs in `packages/core`. The CLI, GitHub Action and Azure DevOps task should stay thin: they read inputs and call `core`.
 

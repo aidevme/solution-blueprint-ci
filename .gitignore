@@ -12,6 +12,9 @@ dist/
 *.vsix
 *.tgz
 
+# VitePress cache (its build output in .vitepress/dist/ is covered by dist/)
+/github-pages/.vitepress/cache/
+
 # Test output
 coverage/
 .vitest/
