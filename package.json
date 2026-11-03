@@ -12,9 +12,17 @@
     "test": "pnpm build && pnpm -r test"
   },
   "devDependencies": {
+    "@fluentui/svg-icons": "^1.1.341",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^22",
     "esbuild": "^0.28.2",
+    "gray-matter": "^4.0.3",
+    "jszip": "^3.10.2",
+    "markdownlint-cli2": "^0.23.2",
+    "sharp": "^0.35.5",
+    "simple-icons": "^16.31.0",
     "typescript": "^7.0.2",
+    "vitepress": "2.0.0-alpha.18",
     "vitest": "^5.0.5"
   }
 }
