@@ -50,7 +50,7 @@
     }
   ],
   "execution": {
-    "Node20_1": {
+    "Node24": {
       "target": "dist/index.cjs"
     }
   }

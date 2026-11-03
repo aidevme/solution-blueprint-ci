@@ -6,7 +6,7 @@
 
 ![Status](https://img.shields.io/badge/status-early%20development-orange)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
+![Node](https://img.shields.io/badge/node-%3E%3D22-brightgreen)
 
 **solution-blueprint-ci** is a headless documentation engine for Dataverse and Power Platform solutions. It is built on the analysis engine of [Power Platform Solution Blueprint (PPSB)](https://github.com/sabrish/power-platform-solution-blueprint) and packaged for pipelines:
 
@@ -81,7 +81,7 @@ Local / any CI  ──► CLI ────────────────�
 1. **An Entra ID app registration** (service principal).
 2. **An application user** for that service principal in each Dataverse environment you document, created in the Power Platform admin center.
 3. **A security role** for the application user with read access to metadata and solution components. Write access is never required.
-4. **Node.js 20 or later** (for the CLI).
+4. **Node.js 22 or later** (for the CLI). The Azure DevOps task runs on the agent's Node.js 24 runner.
 
 ## Usage
 

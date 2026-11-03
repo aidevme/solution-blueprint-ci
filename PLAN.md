@@ -74,6 +74,7 @@ Newest first. Details in each skill's `CHANGELOG.md` and the commit.
 
 | Date | Decision |
 | --- | --- |
+| 2026-11-03 | The packages need Node.js 22 or later; the Azure DevOps task declares the `Node24` runner, because Azure Pipelines has no Node.js 22 runner |
 | 2026-11-02 | Removed the inherited template docs (ADRs other than ADR-0008, `docs/onboarding/`, `docs/review-logs/`): they described a template this repo doesn't use and internal sources, in a public repo |
 | 2026-11-02 | This plan tracks solution-blueprint-ci; blog content and channel tasks are out of scope here |
 | 2026-11-02 | Removed the blog, SEO, image, readability, social, analytics and Bruno skills, the `aidevme-context` agent and the `seo-audit`, `media-audit` and `bruno-media` workflows; older decisions about them below are history |
