@@ -4,9 +4,10 @@ metadata:
   layer: atomic
   scope: core
 description: |
-  Work on a VitePress documentation site: write and move pages, change the sidebar, nav and site config, and fix
-  build errors and dead links, with VitePress questions answered from the official VitePress docs through the
-  Vue Docs MCP server (vue-mcp.org). Use when:
+  Create and work on a VitePress documentation site: create new sites in github-pages/, deployed to GitHub Pages,
+  write and move pages, change the sidebar, nav and site config, and fix build errors and dead links, with answers
+  from the official VitePress docs through the Vue Docs MCP server (vue-mcp.org). Use when:
+  (0) User asks to create a VitePress or docs site, or publish docs to GitHub Pages
   (1) User asks to add, move or restructure docs pages, or change the VitePress sidebar, nav or config
   (2) `vitepress build` / `docs:build` fails (Vue template errors in Markdown, dead links) or a page renders wrong
   (3) User asks how something works in VitePress (config options, frontmatter, theme, data loaders, deploy)
@@ -85,10 +86,39 @@ MCP files yourself unless they ask.
 5. **When the server isn't available,** say so, show the setup above, mark the answer "VitePress docs not checked",
    and rely on the build and the existing config; never present unverified options as fact.
 
+## Create a site
+
+A new VitePress site always lives in a top-level **`github-pages/`** folder and is deployed to GitHub Pages.
+
+1. **Check the docs** for the version you install: the
+   [getting started](https://vitepress.dev/guide/getting-started) guide (Node.js version, ESM-only) and the
+   [GitHub Pages deploy](https://vitepress.dev/guide/deploy#github-pages) guide. The docs may describe a pre-release
+   (`vitepress@next`); ask which version to install when the stable and next releases differ.
+2. **Install and add scripts** to the `package.json` that owns the site (the workspace root in a monorepo):
+   `"docs:dev": "vitepress dev github-pages"`, `"docs:build": "vitepress build github-pages"`,
+   `"docs:preview": "vitepress preview github-pages"`. The nearest `package.json` needs `"type": "module"`, or the
+   config uses `.mts`. If you use `vitepress init`, give `./github-pages` as the location.
+3. **Config** in `github-pages/.vitepress/config.mts`. A project site is served at
+   `https://<owner>.github.io/<repo>/`, so set `base: '/<repo>/'`; use `'/'` only for a `<owner>.github.io`
+   repository or a custom domain. Add `github-pages/.vitepress/cache/` and `github-pages/.vitepress/dist/` to
+   `.gitignore`.
+4. **Workflow** `.github/workflows/<name>.yml`, from the deploy guide's sample: build on pushes to the default branch
+   and on `workflow_dispatch`, with the paths changed to `github-pages/.vitepress/cache` (cache) and
+   `github-pages/.vitepress/dist` (Pages artifact), the repository's package manager, and the latest major version of
+   each action. It needs `pages: write` and `id-token: write`.
+5. **Pages source.** Tell the user to select **GitHub Actions** under Settings → Pages → Build and deployment →
+   Source. It's a repository setting: change it only when they ask.
+6. **Verify** as in the workflow below, and give the site URL the first deployment will use.
+
+An existing site in another folder (for example `docs/`) stays where it is: say that it differs from this rule and
+offer the move. Moving the source folder doesn't change page URLs, but every script, config path, workflow path and
+`.gitignore` entry that names the folder changes with it.
+
 ## Workflow
 
-1. **Find the site.** The docs scripts in `package.json` (for example `docs:dev`, `docs:build`, `docs:preview`) name
-   the source folder; the config is `<folder>/.vitepress/config.(mts|ts|js)`. Read the repository's documentation
+1. **Find the site.** It's in `github-pages/`; otherwise the docs scripts in `package.json` (for example `docs:dev`,
+   `docs:build`, `docs:preview`) name the source folder. The config is `<folder>/.vitepress/config.(mts|ts|js)`.
+   Read the repository's documentation
    rules (`AGENTS.md`, `CONTRIBUTING.md`): which pages need sidebar entries, link style, required checks.
 2. **Look up VitePress behavior** with the Vue Docs MCP server before changing config or relying on a feature
    (sidebar shape, `srcExclude`, `rewrites`, frontmatter, `cleanUrls`, `base`).
@@ -115,6 +145,7 @@ MCP files yourself unless they ask.
 
 ## Rules
 
+- **New sites go in `github-pages/`** and deploy to GitHub Pages through an Actions workflow.
 - **Docs before memory:** VitePress behavior comes from the Vue Docs MCP server, cited; say "not checked" otherwise.
 - **Build is the gate:** a change isn't done until the build passes, or the remaining failure is shown to be outside it.
 - **Keep URLs in mind:** moved or renamed pages break old links; say so.
