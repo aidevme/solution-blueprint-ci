@@ -1,0 +1,38 @@
+{
+  "manifestVersion": 1,
+  "id": "solution-blueprint-ci",
+  "name": "Solution Blueprint CI",
+  "version": "0.1.0",
+  "publisher": "aidevme",
+  "description": "Generate architecture documentation for Power Platform and Dataverse solutions.",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "categories": [
+    "Azure Pipelines"
+  ],
+  "files": [
+    {
+      "path": "task.json",
+      "packagePath": "SolutionBlueprint/task.json"
+    },
+    {
+      "path": "dist",
+      "packagePath": "SolutionBlueprint/dist"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "solution-blueprint-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "SolutionBlueprint"
+      }
+    }
+  ]
+}

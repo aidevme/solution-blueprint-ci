@@ -59,6 +59,19 @@
         "Marks any answer as \"VitePress docs not checked\" instead of stating option details as fact",
         "Doesn't change any MCP configuration on its own"
       ]
+    },
+    {
+      "id": 6,
+      "prompt": "Create a VitePress docs site for this repository and publish it on GitHub Pages.",
+      "expected_output": "The site is created in github-pages/ with docs scripts, a config whose base matches the repository name, ignored cache and dist folders, and a Pages workflow using github-pages/ paths; the build runs, and the user is told to set the Pages source to GitHub Actions.",
+      "files": [],
+      "expectations": [
+        "Checks installation and the GitHub Pages deploy guide through the Vue Docs MCP server, citing the pages, and asks which version when stable and next differ",
+        "Creates the site in a top-level github-pages/ folder, with docs:dev, docs:build and docs:preview scripts pointing at github-pages",
+        "Sets base to '/<repo>/' in github-pages/.vitepress/config.mts, and ignores github-pages/.vitepress/cache and dist",
+        "Writes a workflow that uploads github-pages/.vitepress/dist with pages: write and id-token: write permissions",
+        "Runs the build and reports the exit code, and tells the user to select GitHub Actions as the Pages source instead of changing the setting itself"
+      ]
     }
   ]
 }

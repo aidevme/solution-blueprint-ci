@@ -81,13 +81,16 @@ ADR-0008 (`docs/decisions/`, the sync mechanism) still applies.
 | `.content/wordpress-posts/<slug>/` | One folder per post: `index.md` (article with WordPress frontmatter), `images/`, `tables/`, `diagrams/`, `image-generation-prompts.md` and the social drafts |
 | `.content/templates/wordpress-post-template/` | The formats to copy for the files in a post folder |
 | `.research/` | Timestamped research runs (`<YYYY-MM-DD_HHmmss>_…`), one new file or folder per run, never overwritten |
+| `packages/` | pnpm workspace: `core` and `cli` publish to npm; `gh-action` and `ado-task` are private and bundle `core` |
+| `action.yml` | GitHub Action entry point; runs the committed bundle in `packages/gh-action/dist/` |
+| `github-pages/` | The VitePress docs site (`pnpm docs:dev`, `pnpm docs:build`), deployed to GitHub Pages by `.github/workflows/docs.yml` |
 | `agent-src/skills/core/<group>/<name>/` | Reusable skills (`delivery`, `foundation`, `meta`, `reference`) |
 | `agent-src/skills/project/<name>/` | Skills written for aidevme.com (no group folder) |
 | `agent-src/agents/` | `change-reviewer` |
 | `agent-src/sync/` | `sync.ps1`, `verify-parity.ps1`, `check-changelogs.ps1`, `validate-skills.sh`, the skills manifest |
 | `.templates/` | Style guides: writing, changelog, developer guide, refactoring |
 | `agent/` | Project wiki (`raw/`, `_inbox/`, `wiki/`, `work/`); rules in [`agent/schema.md`](agent/schema.md) |
-| `.github/workflows/` | The weekly skills check and the pull request review as GitHub Agentic Workflows |
+| `.github/workflows/` | The weekly skills check and the pull request review as GitHub Agentic Workflows, and the docs site build and deploy |
 | `.github/ISSUE_TEMPLATE/` | Issue forms for product bugs and feature requests, and for repo tooling (bugs, new skills, improvements) |
 
 ---
@@ -186,6 +189,9 @@ Use the skill that owns the job:
   one summary comment, hiding the previous summary. It never approves or blocks; each run uses `ANTHROPIC_API_KEY`.
 - The prompt can't read `${{ vars.* }}` or environment variables; values reach the agent through files written by
   a pre-agent step.
+- **Docs site:** `.github/workflows/docs.yml` is a plain workflow, not an agentic one, so it has no source to compile.
+  It builds `github-pages/` on pull requests to `dev` and `main`, and deploys it to GitHub Pages on pushes to `main`
+  and on demand. The repository's Pages source must be set to GitHub Actions.
 
 ---
 

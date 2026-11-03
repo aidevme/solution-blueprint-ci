@@ -6,7 +6,7 @@
 
 ![Status](https://img.shields.io/badge/status-early%20development-orange)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
+![Node](https://img.shields.io/badge/node-%3E%3D22-brightgreen)
 
 **solution-blueprint-ci** is a headless documentation engine for Dataverse and Power Platform solutions. It is built on the analysis engine of [Power Platform Solution Blueprint (PPSB)](https://github.com/sabrish/power-platform-solution-blueprint) and packaged for pipelines:
 
@@ -15,6 +15,8 @@
 - an **Azure DevOps task** (pipeline extension) for Azure Pipelines
 
 Each run connects to a Dataverse environment with a service principal, discovers the selected solutions, and exports a complete blueprint as **Markdown** (ready for Azure DevOps Wiki), **HTML** (for stakeholders) and **JSON** (for automation and baselines).
+
+**Documentation:** [aidevme.github.io/solution-blueprint-ci](https://aidevme.github.io/solution-blueprint-ci/)
 
 > [!NOTE]
 > This project is in early development. The commands, inputs and package names below describe the target design and may change before the first release.
@@ -58,10 +60,11 @@ PPSB produces excellent blueprints, but it runs interactively inside PPTB Deskto
 
 ```
 solution-blueprint-ci/
+├─ action.yml                                GitHub Action entry point
 ├─ packages/
 │  ├─ core/        @aidevme/blueprint-core   Dataverse client, analysis engine, exporters
 │  ├─ cli/         @aidevme/blueprint-cli    `blueprint` command
-│  ├─ gh-action/                             action.yml + bundled dist/ (node24)
+│  ├─ gh-action/                             Action source + bundled dist/ (node24)
 │  └─ ado-task/                              task.json + vss-extension.json → .vsix
 └─ docs/
 ```
@@ -80,7 +83,7 @@ Local / any CI  ──► CLI ────────────────�
 1. **An Entra ID app registration** (service principal).
 2. **An application user** for that service principal in each Dataverse environment you document, created in the Power Platform admin center.
 3. **A security role** for the application user with read access to metadata and solution components. Write access is never required.
-4. **Node.js 20 or later** (for the CLI).
+4. **Node.js 22 or later** (for the CLI). The Azure DevOps task runs on the agent's Node.js 24 runner.
 
 ## Usage
 
@@ -190,18 +193,6 @@ blueprint/
 └─ blueprint.json             Full dataset
 ```
 
-## Development
-
-```bash
-git clone https://github.com/aidevme/solution-blueprint-ci.git
-cd solution-blueprint-ci
-pnpm install
-pnpm build
-pnpm test
-```
-
-Requirements: Node.js 20+ and pnpm 9+.
-
 ## Roadmap
 
 - [ ] Headless core with Dataverse Web API client
@@ -218,7 +209,7 @@ This project builds on **[Power Platform Solution Blueprint (PPSB)](https://gith
 
 ## Contributing
 
-Issues and pull requests are welcome. Please open an issue first to discuss significant changes.
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started, and [DEVELOPER.md](DEVELOPER.md) to build and test locally.
 
 ## License
 

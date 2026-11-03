@@ -1,0 +1,33 @@
+{
+  "name": "@aidevme/blueprint-core",
+  "version": "0.1.0",
+  "description": "Headless analysis engine for Power Platform and Dataverse solution blueprints.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aidevme/solution-blueprint-ci.git",
+    "directory": "packages/core"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm build"
+  }
+}
