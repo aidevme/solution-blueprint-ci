@@ -21,7 +21,7 @@ Legend: ✅ done · 🔄 in progress · ⬜ not started
 
 | Area | What exists | Status |
 | --- | --- | --- |
-| Product | pnpm workspace in `packages/` (`core`, `cli`, `gh-action`, `ado-task`) with input handling and tests; blueprint generation and authentication are stubs. Design and roadmap are in `README.md` | 🔄 |
+| Product | pnpm workspace in `packages/` (`core`, `cli`, `gh-action`, `ado-task`) with input handling, a token-based Dataverse client and tests; blueprint generation is a stub, and the wrappers don't pass credentials yet. Design and roadmap are in `README.md` | 🔄 |
 | Agent layer | `AGENTS.md` → `CLAUDE.md` / Copilot instructions; 11 skills and the `change-reviewer` agent synced to `.claude/` and `.github/`; `verify-parity.ps1`; not committed yet | 🔄 |
 | Changelogs | A `CHANGELOG.md` per skill (the only history); `check-changelogs.ps1` creates missing ones and gates changes; the style guide is missing | 🔄 |
 | Diagrams | `aidevme-diagram-mermaid`, `aidevme-diagram-drawio` | ✅ |
@@ -35,8 +35,9 @@ Legend: ✅ done · 🔄 in progress · ⬜ not started
 
 ### Product
 
-- ⬜ Record the first product decisions as ADRs: the Dataverse client, the use of PPSB and the package layout.
-- ⬜ Build the roadmap in `README.md`, starting with the headless core and its Dataverse Web API client.
+- ⬜ Prove `TokenDataverseClient` against a demo environment, then copy PPSB's `src/core` as ADR-0010 describes.
+- ⬜ Record the package layout as an ADR.
+- ⬜ Build the rest of the roadmap in `README.md`.
 - ⬜ Before the first publish: claim the `@aidevme` npm scope, confirm the `aidevme` Visual Studio Marketplace
   publisher, and verify the `powerplatform-spn` service connection type in `packages/ado-task/task.json`.
 - ⬜ Decide the role of `--publishers`, and whether the Azure Artifacts section stays in `README.md` now that npm is
@@ -74,6 +75,7 @@ Newest first. Details in each skill's `CHANGELOG.md` and the commit.
 
 | Date | Decision |
 | --- | --- |
+| 2026-11-02 | The product copies PPSB's `src/core` and runs it on `TokenDataverseClient`; tokens come from Entra ID through `fetch`, not `@azure/identity`, to keep the bundles free of dependencies (ADR-0010) |
 | 2026-11-03 | The packages need Node.js 22 or later; the Azure DevOps task declares the `Node24` runner, because Azure Pipelines has no Node.js 22 runner |
 | 2026-11-02 | Removed the inherited template docs (ADRs other than ADR-0008, `docs/onboarding/`, `docs/review-logs/`): they described a template this repo doesn't use and internal sources, in a public repo |
 | 2026-11-02 | This plan tracks solution-blueprint-ci; blog content and channel tasks are out of scope here |
@@ -92,4 +94,5 @@ Newest first. Details in each skill's `CHANGELOG.md` and the commit.
 | 2026-10-23 | The SEO audit runs as a GitHub Agentic Workflow with a read-only agent and a single safe-output issue |
 | 2026-10-22 | Commits are attributed to Zsolt Zombik, with no AI co-author lines |
 
-Architecture decisions are in `docs/decisions/`: ADR-0008, the sync mechanism, is the one kept from the template.
+Architecture decisions are in `docs/decisions/`: ADR-0008, the sync mechanism, is the one kept from the template, and
+ADR-0010 covers the PPSB core and the Dataverse client.
